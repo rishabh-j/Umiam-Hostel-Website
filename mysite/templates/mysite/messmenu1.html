@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+{% if user.is_authenticated and abo|stringformat:"s" == "secretary" %}
+    <h2><a href="/addmessmenu/">Add announcement</a> </h2>
+{% endif %}
+    {% for field in info %}
+        <h1>Mess menu(updated on {{field.date}} )</h1>
+        <img src="{{field.image.url}}">
+        {% if user.is_authenticated and abo|stringformat:"s" == "secretary" %}
+            <h4><a href="/deletemessmenu/{{field.id}}">Delete</a></h4>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

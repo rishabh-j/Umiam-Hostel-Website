@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Umiam Hostel - IIT Guwahati</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">      
+	<link href="{% static 'css/main.css' %}" rel="stylesheet">
+	 <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+	 <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+      <style>
+.title_paragraph a
+{
+    padding-left: 30px;
+    color: #000;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(16,16,16,0.1);
+    font-family: 'Buda', cursive;
+    font-weight: 100;
+    font-size: 20px;
+    z-index: 0;
+    position: relative;
+}
+
+.delete_paragraph a
+{
+    padding-left: 30px;
+    color: #000;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(16,16,16,0.1);
+    font-family: 'Buda', cursive;
+    font-weight: 100;
+    font-size: 14px;
+    z-index: 0;
+    position: relative;
+}
+
+.div-abc div
+{
+    background: #F00;
+}
+.archit
+{
+    position:relative
+    left:50px
+}
+
+
+#wrap {
+  min-height: 100%;
+}
+div.absolute{
+position: absolute;
+bottom:0px;
+width:100%;
+}
+
+
+
+
+</style>
+
+  </head>
+  <body class="homepage">   
+	<header id="header">
+        <nav class="navbar navbar-fixed-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/home/">Umiam Hostel</a>
+                </div>
+				
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/home/">Home</a></li>
+                        <li><a href="/boarder/">Boarder Information</a></li>
+                        <li><a href="/announcement/">Announcements</a></li>
+                        <li><a href="/award/">Achievements</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="/logout_user/">Logout</a></li>
+                        {% else %}
+                        <li><a href="/login_user/">Login</a></li>
+                        {% endif %}
+                        <li><a href="/aboutus/">Contact</a></li>
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+		
+    </header><!--/header-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+
+    <br><br>
+{% for d in info  %}
+    <span class = "title_paragraph"><a href="{{d.doc.url}}"> &#8226 {{d.title}}_{{d.hostel}}</a></span>
+    <span><a href="/deletefile/{{d.id}}"><span class="glyphicon glyphicon-trash"></span></a></span>
+    <br>
+{% endfor  %}
+
+</div>
+
+<br>
+
+<div class="absolute">
+    <div class="text-center"><a href="/pay/"><button class="btn-warning btn">Pay</button></a></div>
+    <br>
+    <div class="text-center"><a href="/clearall/"><button class="btn btn-danger">CLEAR DATABASE</button></a></div>
+    <br>
+    <br>
+
+    <section id="bottom">
+        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://intranet.iitg.ernet.in/noticeboard/">Notice board</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="https://webmail.iitg.ernet.in/src/login.php">Webmail</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://www.iitg.ernet.in/acad/acadCal/academic_calander.htm">Academic Calendar</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://www.iitg.ac.in/aa/pages/campusmap/index.php?hq">Campus Map</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+            </div>
+        </div>
+    </section><!--/#bottom-->
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                   <div class="social">
+                        <ul class="social-share">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+                   </div>
+                </div>
+            </div>
+        </div><!--/.container-->
+    </div><!--/.top-bar-->
+
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <!--
+                    All links in the footer should remain intact.
+                    Licenseing information is available at: http://bootstraptaste.com/license/
+                    You can buy this theme without footer links online at: http://bootstraptaste.com/buy/?theme=Gp
+                -->
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+    </div>
+
+    </div>
+
+    </body>
+    </html>

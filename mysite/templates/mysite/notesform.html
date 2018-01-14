@@ -1,0 +1,275 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Umiam Hostel - IIT Guwahati</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+     <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="homepage">
+<header id="header">
+        <nav class="navbar navbar-fixed-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/home/">Umiam Hostel</a>
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/home/">Home</a></li>
+                        <li ><a href="/boarder/">Boarder Information</a></li>
+                        <li><a href="/announcement/">Announcements</a></li>
+                        <li><a href="/award/">Achievements</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="/logout_user/">Logout</a></li>
+                        {% else %}
+                        <li><a href="/login_user/">Login</a></li>
+                        {% endif %}
+                        <li><a href="/aboutus/">Contact</a></li>
+                        {% if user.is_authenticated and abou|stringformat:"s" == "secretary" %}
+                        <li><a href="/addboarder/">Add field</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+
+    </header>
+<br><br><br><br><br><br><br>
+
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+#wrap {
+  min-height: 100%;
+}
+div.absolute{
+position: absolute;
+bottom:0px;
+width:100%;
+}
+
+
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  width: 100%;
+  position: relative
+}
+
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 3px solid #00B4CC;
+  padding: 5px;
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.upButton {
+  position: absolute;  
+  left: 500px;
+  width: 150px;
+  height: 40px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: relative;
+  top: 0%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+</style>
+
+
+
+<form action="{% url 'mysite:notes'%}" method="post">
+{%  csrf_token %}
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="Search by Course Code" name = "code">
+      <button type="submit" class="searchButton" value="Search" id="submit">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+</form>
+<button type="submit" class="upButton" onclick="f()">UPLOAD</button>
+
+<br><br>
+
+{% if l %}
+ <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Notes</th>
+        <th>Upvote</th>
+        <th>Author</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+<tbody>
+    {% for x,y in l.items  %}
+    </tr>
+    <td><a href="{{x.material.url}}">{{x.title}}({{x.year}}) </a></td>
+    <td>{{x.votes}}</td> 
+    <td>{{y.name}} ( {{y.votes}} )</td>
+     <td><h4><a href="/upvote/{{x.id}}"><span class="glyphicon glyphicon-thumbs-up"></span></a></h4></td>
+     <td><h4><a href="/downvote/{{x.id}}"><span class="glyphicon glyphicon-thumbs-down"></span></a></h4></td>
+     </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endif %}
+
+<div class="absolute">
+<section id="bottom">
+        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://intranet.iitg.ernet.in/noticeboard/">Notice board</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="https://webmail.iitg.ernet.in/src/login.php">Webmail</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://www.iitg.ernet.in/acad/acadCal/academic_calander.htm">Academic Calendar</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://www.iitg.ac.in/aa/pages/campusmap/index.php?hq">Campus Map</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+            </div>
+        </div>
+    </section><!--/#bottom-->
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                   <div class="social">
+                        <ul class="social-share">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+                   </div>
+                </div>
+            </div>
+        </div><!--/.container-->
+    </div><!--/.top-bar-->
+    
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2015 <a target="_blank" href="http://bootstraptaste.com/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">bootstraptaste</a>. All Rights Reserved.
+                </div>
+                <!-- 
+                    All links in the footer should remain intact. 
+                    Licenseing information is available at: http://bootstraptaste.com/license/
+                    You can buy this theme without footer links online at: http://bootstraptaste.com/buy/?theme=Gp
+                -->
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+    </div>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    
+
+    <script>
+    function f(){
+        window.location.href = '/notesupload/'; 
+    }
+    </script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>   
+    <script src="js/wow.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <title>registerationform</title>
+      <link rel="stylesheet" href="{% static 'css/register.css' %}">
+	<style type="text/css">
+		.fff
+		{
+			position:relative;
+			left:600px;
+			top:300px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+<div id="qe">
+<input id="inp" type="text" name="key" class="fff" style="font-size:18px">
+<button type="submit" class="btn btn-primary fff" onclick="f()">AUTHENTICATE</button>
+</div>
+
+<div id="we" style="display:none;">
+<form action="{% url 'mysite:register'%}" method="post">
+	{% csrf_token %}
+  <h2>Register</h2>
+  		<p>
+			<label for="Email" class="floatLabel">Username</label>
+			<input id="Email" name="username" type="text">
+		</p>
+		<p>
+			<label for="Email" class="floatLabel">WebMail</label>
+			<input id="Email" name="Email" type="text">
+		</p>
+		<p>
+			<label for="password" class="floatLabel">Password</label>
+			<input id="password" name="password" type="password">
+			<span>Enter a password longer than 8 characters</span>
+		</p>
+		<p>
+			<label for="confirm_password" class="floatLabel">Confirm Password</label>
+			<input id="confirm_password" name="confirm_password" type="password">
+			<span>Your passwords do not match</span>
+		</p>
+		<p>
+			<input type="submit" value="Create My Account" id="submit">
+		</p>
+
+	</form></div>
+
+
+		<section id="bottom">
+        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://intranet.iitg.ernet.in/noticeboard/">Notice board</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="https://webmail.iitg.ernet.in/src/login.php">Webmail</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://www.iitg.ernet.in/acad/acadCal/academic_calander.htm" style="color:black;">Academic Calendar</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="widget">
+                        <h3><a href="http://www.iitg.ac.in/aa/pages/campusmap/index.php?hq">Campus Map</a></h3>
+
+                    </div>    
+                </div><!--/.col-md-3-->
+            </div>
+        </div>
+    </section><!--/#bottom-->
+
+
+	<script>
+	function f(){
+	var x=document.getElementById("inp").value;
+	if (x=="normal" || x=="secy")
+	{
+		document.getElementById("qe").style.display="none";
+		document.getElementById("we").style.display="block";
+
+	}
+	else if(x=="printer")
+	{
+		window.location.href = '/registerprinter/';
+	}
+
+
+
+
+
+
+
+	}
+
+
+	</script>
+
+
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script  src="{% static 'js/register.js' %}"></script>
+</body>
+</html>
+
+
